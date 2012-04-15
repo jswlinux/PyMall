@@ -1,0 +1,123 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>PyMall</title>
+	<link rel="stylesheet" href="/static/style.css" type="text/css" charset="utf-8" />	
+</head>
+
+<body>
+	<div id="background">
+		<div id="page">
+			<div id="header">
+				<span id="connect">
+					<a href="https://www.facebook.com/jswlinux" target="_blank" class="facebook"></a>
+					<a href="http://twitter.com/jswlinux" target="_blank" class="twitter"></a>
+					<a href="http://www.youtube.com/jswlinux" target="_blank" class="vimeo"></a>
+				</span>
+				<span id="infos">
+					<a href="/membership/signin">Sign in</a>|
+					<a href="/membership/signup">Sign up</a>
+				</span>
+				<a href="/" id="logo"></a> <!-- /#logo -->
+				<ul id="navigation">
+					<li><a href="/">Home</a></li>
+					<li><a href="/about/">About</a></li>
+					<li><a href="/blog/">Blog</a></li>
+					<li><a href="/shop/">Shop</a></li>
+					<li><a href="/contactus/">Contact Us</a></li>
+				</ul>
+			</div> <!-- /#header -->
+			<div id="contents">
+				<div id="main">
+					<p>
+						<b>Personal Information</b><br/>
+						<form name="register" action="/membership/register/" method="post">
+						<div style=width:150px;float:left>
+							Username:
+						</div>
+						<div>
+							<input type="text" name="username" id="username"onKeyup="this.value=this.value.replace(/[^A-z]/g,'');">
+						</div>
+						<div style=width:150px;float:left>
+							Password:
+						</div>
+						<div>
+							<input type="password" name="password" id="password"><br>
+						<br>
+						</div>
+						<div style=width:150px;float:left>
+							First name:
+						</div>
+						<div>
+							<input type="text" name="firstname" id="firstname" onKeyup="this.value=this.value.replace(/[^A-z]/g,'');">
+						</div>
+						<div style=width:150px;float:left>
+							Last name: 
+						</div>
+						<div>
+							<input type="text" name="lastname" id="lastname" onKeyup="this.value=this.value.replace(/[^A-z]/g,'');">
+						</div>
+						<div style=width:150px;float:left>
+							Phone#: 
+						</div>
+						<div>
+							<input type="text" name="ph" id="ph" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+						</div>
+						<div style=width:150px;float:left>
+							Street: 
+						</div>
+						<div>
+							<input type="text" name="street1" id="street1">
+						</div>
+						<div style=width:150px;float:left>
+							Street: 
+						</div>
+						<div>
+							<input type="text" name="street2" id="street2">
+						</div>
+						<div style=width:150px;float:left>
+							City: 
+						</div>
+						<div>
+							<input type="text" name="city" id="city" onKeyup="this.value=this.value.replace(/[^A-z]/g,'');">
+						</div>
+						<div style=width:150px;float:left>
+							State: 
+						</div>
+						<div>
+							<input type="text" name="state" id="state" maxlength=2 onKeyup="this.value=this.value.replace(/[^A-z]/g,'');">
+						</div>
+						<div style=width:150px;float:left>
+							Zip Code: 
+						</div>
+						<div>
+							<input type="text" name="zip" id="zip" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+						</div>
+						<input type="hidden" name="signup" value="yes">
+						<input type="submit" value="Sign Up">
+						</form>
+					</p>
+				</div>
+			</div> <!-- /#contents -->
+			<div id="footer">
+				<div id="description">
+					<div>
+						<a href="/" class="logo"></a>
+						<span>&copy; Copyright &copy; 2012. <a href="/">Seowon Jung</a> All rights reserved</span>
+					</div>
+					<p>
+						This website is Hawaii Pacific University CSCI 3771 Python class Project.
+					</p>
+				</div>
+				<div class="navigation">
+					<a href="/">Home</a>|
+					<a href="/about/">About</a>|
+					<a href="/blog/">Blog</a>|
+					<a href="/shop/">Shop</a>|
+					<a href="/contactus/">Contact Us</a>
+				</div>
+			</div> <!-- /#footer -->
+		</div> <!-- /#page -->
+	</div> <!-- /#background -->
+</body>
+</html>
