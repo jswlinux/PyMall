@@ -32,40 +32,67 @@
 					<p>
 						<b>User Information</b><br/>
 						<!--User No: {{ user_no }}<br>-->
-						First name: {{ firstname }} <br>
-						Last name: {{ lastname }}<br>
-						Phone #: {{ ph }}<br>
-						Address: {{ address }}<br><br>
+						<b>First name</b>: {{ firstname }} <br>
+						<b>Last name</b>: {{ lastname }}<br>
+						<b>Phone #</b>: {{ ph }}<br>
+						<b>Address</b>: {{ address }}<br><br>
+						<b>Cart</b>
+						{% ifequal reset 'empty' %}
+							<br>Your cart is empty<br>
+						{% endifequal %}
+						<table border="0">
+						{% for each in itemsInCart %}
+							{% ifequal each.membership_id_id user_no %}
+								{% for item in allItem %}
+									{% ifequal item.id each.item_id %}
+									<tr>
+										<td rowspan="4"><img src="/static/{{ item.item_img }}" width="101" height="125"></td>
+										<td width="500">Item#: {{ item.id }}</td>
+										<td>Price</td>
+										<td><center>Quantity</center></td>
+										<td><center>Sub Total</center></td>
+									</tr>
+										
+										<td><b>Item type: {{ item.item_name }}</b></td>
+										<td>${{ item.item_price }}</td>
+										<td valign="center">
+											<form method="post" action="/membership/qty/" style="padding-top:8px;">
+												<input type="text" name="qty" value="{{ each.item_qty }}" maxlength="3" size="3" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+												<input type="hidden" name="item_no" value="{{ item.id }}">
+												<input type="submit" value="Edit qty">
+											</form>
+										</td>
+										<td>${% widthratio item.item_price 1 each.item_qty %}.00</td>
+									</tr>
+									<tr>
+										<td>Description: {{ item.item_desc }}</td>
+										<td>&nbsp;</td>
+										<td>
+											<a href="/membership/deleteItem/?item_no={{ item.id }}">
+											<div style="text-align:right">Delete</div></a>
+										</td>
+									</tr>
+									<tr>
+										<td>Size: {{ item.item_size }}</td>
+									<tr>
+									<tr><td colspan=4>&nbsp;</td></tr>
+									{% endifequal %}
+								{% endfor %}
+							{% endifequal %}
+							<br>
+						{% endfor %}
+						</table>
+						<br><br>
+						{% ifequal reset 'notempty' %}
+							<a href="/membership/resetCart/">Reset my cart!</a>
+						{% endifequal %}
 					</p>
 
 					<p>
-						<b>We Have More Templates for You</b><br/>
-						Looking for more templates? Just browse through all our <a href="http://www.freewebsitetemplates.com/">Free Website	Templates</a> and find what you&acute;re looking for. But if you don&acute;t find any
-						website template you can use, you can try our <a href="http://www.freewebsitetemplates.com/freewebdesign/">Free Web Design</a> service and tell us all about it. Maybe you&acute;re looking for something different,
-						something special. And we love the challenge of doing something	different and something special.
-					</p>
-
-					<p>
-						<b>Be Part of Our Community</b><br/>
-						If you&acute;re experiencing issues and concerns about this website template, join the discussion <a href="http://www.freewebsitetemplates.com/forum/">on our forum</a> and meet other people in the community who share the same interests with you.
-					</p>
-
-					<p>
-						Template details: Version 2
-						Website Template details, discussion and updates for this <a href="http://www.freewebsitetemplates.com/discuss/tshirtwebsitetemplate/">T-shirt Website Template</a>.<br/>
-						Website Template design by <a href="http://www.freewebsitetemplates.com/">Free Website Templates</a>.<br/>
-						Please feel free to remove some or all the text and links of this page and replace it with your own About content.
+						
 					</p>
 				</div>
-				<div id="featured">
-					<ul>
-						<li><img src="/static/shirt-red.jpg" alt="shirt" /></li>
-						<li><img src="/static/shirt-orange.jpg" alt="shirt" /></li>
-						<li><img src="/static/shirt-green.jpg" alt="shirt" /></li>
-						<li class="last"><img src="/static/shirt-blue.jpg" alt="shirt" /></li>
-					</ul>
-					<a href="/shop/" class="button">shop here!</a> 
-				</div>
+				
 			</div> <!-- /#contents -->
 			<div id="footer">
 				<div id="description">

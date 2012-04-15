@@ -9,7 +9,7 @@ def main(request):
 	if request.session.has_key('username'):
 		return HttpResponse(mainTemplate.render(Context(
 		{	
-			"menu1":"My cart", "address1":"# onClick=nextweek();",
+			"menu1":"My cart", "address1":"/membership/myCart/",
 			"menu2":"Sign out:"+(request.session['username'].capitalize()), "address2":"/membership/signout/",
 		})))
 	else:
@@ -24,7 +24,7 @@ def about(request):
 	if request.session.has_key('username'):
 		return HttpResponse(aboutTemplate.render(Context(
 		{	
-			"menu1":"My cart", "address1":"# onClick=nextweek();",
+			"menu1":"My cart", "address1":"/membership/myCart/",
 			"menu2":"Sign out:"+(request.session['username'].capitalize()), "address2":"/membership/signout/",
 		})))
 	else:
@@ -39,7 +39,7 @@ def blog(request):
 	if request.session.has_key('username'):
 		return HttpResponse(blogTemplate.render(Context(
 		{	
-			"menu1":"My cart", "address1":"# onClick=nextweek();",
+			"menu1":"My cart", "address1":"/membership/myCart/",
 			"menu2":"Sign out:"+(request.session['username'].capitalize()), "address2":"/membership/signout/",
 		})))
 	else:
@@ -54,7 +54,7 @@ def contactus(request):
 	if request.session.has_key('username'):
 		return HttpResponse(contactusTemplate.render(Context(
 		{	
-			"menu1":"My cart", "address1":"# onClick=nextweek();",
+			"menu1":"My cart", "address1":"/membership/myCart/",
 			"menu2":"Sign out:"+(request.session['username'].capitalize()), "address2":"/membership/signout/",
 		})))
 	else:

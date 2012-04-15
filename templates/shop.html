@@ -3,13 +3,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>PyMall</title>
 	<link rel="stylesheet" href="/static/style.css" type="text/css" charset="utf-8" />	
-
-	<script>
-		function nextweek()
-		{
-			window.alert('This feature will be implemented by next week, sorry!');
-		}
-	</script>
 </head>
 
 <body>
@@ -37,47 +30,16 @@
 			<div id="contents">
 				<div id="shop">
 					<ul class="items">
-						<li>
-							<span><img src="/static/m-shirt-red.jpg" alt="shirt" /></span>
-							<span class="price">$18.00</span> Men Red<br/>
-							<a href="#" onClick=nextweek(); class="buy">Buy</a>
-						</li>
-						<li>
-							<span><img src="/static/m-shirt-orange.jpg" alt="shirt" /></span>
-							<span class="price">$18.00</span> Men Orange<br/>
-							<a href="#" onClick=nextweek(); class="buy">Buy</a>
-						</li>
-						<li>
-							<span><img src="/static/m-shirt-green.jpg" alt="shirt" /></span>
-							<span class="price">$18.00</span> Men Green<br/>
-							<a href="#" onClick=nextweek(); class="buy">Buy</a>
-						</li>
-						<li class="last">
-							<span><img src="/static/m-shirt-blue.jpg" alt="shirt" /></span>
-							<span class="price">$18.00</span> Men Blue<br/>
-							<a href="#" onClick=nextweek(); class="buy">Buy</a>
-						</li>
-
-						<li>
-							<span><img src="/static/w-shirt-red.jpg" alt="shirt" /></span>
-							<span class="price">$18.00</span> Women Red<br/>
-							<a href="#" onClick=nextweek(); class="buy">Buy</a>
-						</li>
-						<li>
-							<span><img src="/static/w-shirt-orange.jpg" alt="shirt" /></span>
-							<span class="price">$18.00</span> Women Orange<br/>
-							<a href="#" onClick=nextweek(); class="buy">Buy</a>
-						</li>
-						<li>
-							<span><img src="/static/w-shirt-green.jpg" alt="shirt" /></span>
-							<span class="price">$18.00</span> Women Green<br/>
-							<a href="#" onClick=nextweek(); class="buy">Buy</a>
-						</li>
-						<li class="last">
-							<span><img src="/static/w-shirt-blue.jpg" alt="shirt" /></span>
-							<span class="price">$18.00</span> Women Blue<br/>
-							<a href="#" onClick=nextweek(); class="buy">Buy</a>
-						</li>
+						{% for each in item %}
+						<li
+							{% cycle '>' '>' '>' 'class="last">' %}
+							<a href="?item_no={{ each.id }}">	
+								<span><img src="/static/{{ each.item_img }}"></span>
+								<span class="price">${{ each.item_price}}</span>
+								{{ each.item_name }}</a>
+								<a href="/membership/addCart/?item_no={{ each.id }}" class="buy">Cart</a>
+								</li>
+						{% endfor %}
 					</ul>
 				</div>
 			</div> <!-- /#contents -->

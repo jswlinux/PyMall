@@ -14,6 +14,6 @@ class membership(models.Model):
 	zipcode = models.CharField(max_length=5)
 
 class cart(models.Model):
-	item_id = models.CharField(max_length=2)
+	item_id = models.IntegerField()
 	item_qty = models.IntegerField()
 	membership_id = models.ForeignKey(membership)
