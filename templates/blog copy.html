@@ -35,59 +35,32 @@
 			</div> <!-- /#header -->
 			<div id="contents">
 				<div id="blogs">
-					<center><ul id="blogwrite"><li><a href="/blog/write">Write your story now!</a></li></center></ul><br><br>
+					<center><a href="/blog/write">Write your story now!</a></center><br><br>
 					<div>
-						<!--<span><img src="/static/w-shirt-red.jpg" alt="shirt" /></span>-->
-						{% for post in blog %}
-						<h3>{{ post.title }}</h3>
-						<p align='right'>
-							{% for userinfo in login %}
-								{% ifequal userinfo.id post.user_no %}
-									{{ userinfo.firstname }} {{ userinfo.lastname }}
-								{% endifequal %}
-							{% endfor %}
-							- {{ post.date }}
-						</p>
+						<span><img src="/static/w-shirt-red.jpg" alt="shirt" /></span>
+						<h3>Hello and welcome to PyMall! The unique tee webstore!</h3>
 						<p>
-							<pre style='word-break: break-all; word-wrap: break-word; width:900px;'>{{ post.entry }}</pre>
-							{% ifequal post.user_no currentuser %}
-							<form method='POST' action='/blog/useredit/' align='right'>
-								<input type='submit' value='Edit or Delete'>
-								<input type='hidden' name='blogid' value='{{ post.id }}'>
-							</form>
-							{% endifequal %}
-
-							{% for comments in reply %}
-								{% for user in login %}
-									{% ifequal comments.entry_no_id post.id %}
-										{% ifequal comments.user_no user.id %}
-											<i>{{ comments.comment }} - {{ user.firstname }} {{ user.lastname }}, {{ comments.date }}</i><br>
-										{% endifequal %}
-									{% endifequal %}
-								{% endfor %}
-							{% endfor %}
-							
+							Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, 
+							quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, 
+							vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. 
+							Nam liber tempor cum
 						</p>
-						Add a comment<br>
-						<form method='POST' action='/blog/reply/'>
-							<input type='hidden' name='blogid' value='{{ post.id }}'>
-							<input type='text' size='170' name='reply'>
-							<input type='submit' value='Write'>
-						</form><br><br><br><br>
-						{% endfor %}
+						<a href="/" class="more">Read more...</a>
 					</div>
-
+					<div class="last">
+						<span><img src="/static/m-shirt-blue.jpg" alt="shirt" /></span>
+						<h3>Hello and welcome to PyMall! The unique tee webstore!</h3>
+						<p>
+							Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, 
+							quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, 
+							vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. 
+							Nam liber tempor cum
+						</p>
+						<a href="/" class="more">Read more...</a>
+					</div>
 					<div class="buttons">
-						{% if blog %}
-							{% ifnotequal page 1 %}
-								<a href="/blog/view/?page={{ page|add:-1 }}">newer</a>
-							{% endifnotequal %}
-							<a href="/blog/view/?page={{ page|add:1 }}">older</a> 
-						{% else %}
-							{% ifnotequal page 1 %}
-								<a href="/blog/view/?page={{ page|add:-1 }}">newer</a>
-							{% endifnotequal %}
-						{% endif %}
+						<a href="/blog">newer</a> 
+						<a href="/blog">older</a> 
 					</div>
 				</div>
 			</div> <!-- /#contents -->

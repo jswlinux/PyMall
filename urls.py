@@ -2,6 +2,7 @@ from django.conf.urls.defaults import patterns, include, url
 from pymall.views import main, about, blog, contactus
 from pymall.shop.views import shop
 from pymall.membership.views import membership
+from pymall.blog.views import blog
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -18,7 +19,8 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'pymall.views.main', name='main'),
     url('^about/$', about),
-    url('^blog/$', blog),
+#url('^blog/$', blog),
+	url('^blog/', include('blog.urls')),
     url('^shop/$', shop),
     url('^contactus/$', contactus),
     url('^membership/', include('membership.urls')),

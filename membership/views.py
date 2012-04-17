@@ -5,18 +5,30 @@ from django.template.context import Context
 from membership.models import membership, cart
 from shop.models import items, categories
 
+def isNumber(string):
+	try:
+		int(string)
+		return True
+	except ValueError:
+		return False
+
 def register(request):
 	# Avoid registering with a duplicated username
 	try:
 		login = membership.objects.get(username=username)
 	except:
-		signup = membership(username = request.POST['username'], password = request.POST['password'], firstname = request.POST['firstname'], lastname = request.POST['lastname'], ph = request.POST['ph'], street1 = request.POST['street1'], street2 = request.POST['street2'], city = request.POST['city'], state = request.POST['state'], zipcode = request.POST['zip'])
-		signup.save()
+		if isNumber(request.POST['zip']) == False:
+			return HttpResponse("<script>window.alert('Zip code must be numbers. Please try again');window.history.go(-1);</script>")
+		elif isNumber(request.POST['ph']) == False:
+			return HttpResponse("<script>window.alert('Phone number must be numbers. Please try again');window.history.go(-1);</script>")
+		else:
+			signup = membership(username = request.POST['username'], password = request.POST['password'], firstname = request.POST['firstname'], lastname = request.POST['lastname'], ph = request.POST['ph'], street1 = request.POST['street1'], street2 = request.POST['street2'], city = request.POST['city'], state = request.POST['state'], zipcode = request.POST['zip'])
+			signup.save()
 
-		login = membership.objects.get(username=request.POST['username'])
-		request.session['username'] = request.POST['username']
-		request.session['user_no'] = login.id
-		request.session.get_expire_at_browser_close()
+			login = membership.objects.get(username=request.POST['username'])
+			request.session['username'] = request.POST['username']
+			request.session['user_no'] = login.id
+			request.session.get_expire_at_browser_close()
 
 		return HttpResponse("<script>window.alert('Thank you for visiting PyMall!\\nEnjoy your shopping!');document.location.replace('/');</script>")
 	else:

@@ -115,7 +115,7 @@ ROOT_URLCONF = 'pymall.urls'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 CSRF_COOKIE_NAME = 'PyMall'
 #CSRF_COOKIE_DOMAIN = 'blooming-water-1258.herokuapp.com' #your domain name
-CSRF_COOKIE_DOMAIN = 'fierce-sword-2046.herokuapp.com' #your domain name
+CSRF_COOKIE_DOMAIN = 'falling-sunrise-9871.herokuapp.com' #your domain name
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -139,6 +139,7 @@ INSTALLED_APPS = (
 	'pymall',
 	'pymall.shop',
     'pymall.membership',
+	'pymall.blog',
 )
 
 # A sample logging configuration. The only tangible logging

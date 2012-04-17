@@ -1,13 +1,7 @@
 <html>
 <head>
-	<script>
-		function nextweek()
-		{
-			window.alert('This feature will be implemented by next week, sorry!');
-		}
-	</script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>PyMall</title>
+	<title>PyMall - Write a blog</title>
 	<link rel="stylesheet" href="/static/style.css" type="text/css" charset="utf-8" />	
 </head>
 
@@ -21,14 +15,14 @@
 					<a href="http://www.youtube.com/jswlinux" target="_blank" class="vimeo"></a>
 				</span>
 				<span id="infos">
-					<a href={{ address1 }}>{{ menu1 }}</a>|
+					<a href="{{ address1 }}">{{ menu1 }}</a>|
 					<a href="{{ address2 }}">{{ menu2 }}</a>
 				</span>
 				<a href="/" id="logo"></a> <!-- /#logo -->
 				<ul id="navigation">
 					<li><a href="/">Home</a></li>
-					<li class="selected"><a href="/about/">About</a></li>
-					<li><a href="/blog/view/">Blog</a></li>
+					<li><a href="/about/">About</a></li>
+					<li class="selected"><a href="/blog/view/">Blog</a></li>
 					<li><a href="/shop/">Shop</a></li>
 					<li><a href="/contactus/">Contact Us</a></li>
 				</ul>
@@ -36,18 +30,42 @@
 			<div id="contents">
 				<div id="main">
 					<p>
-						<b>Welcome to PyMall - We Have T-shirts for Everyone</b><br/>
-						Our website is created with inspiration, checked for quality and originality and meticulously sliced and coded. What&acute;s more, they&acute;re
-						absolutely free! You can do a lot with them. You can modify them. You can use them to design T-shirts for clients.
+						<b></b><br/>
+						<form name="signin" action="/blog/edit/" method="post">
+						<div style='width:150px; height=30px; float:left;'>
+							Post title:
+						</div>
+						<div style='height=30px;'>
+							<input type="text" name="title" size="100" value="{{ blogtitle }}" style='border:0; height:20px;'>
+						</div>
+						<div style='width:150px; height=30px; float:left'>
+							Your story: 
+						</div>
+						<div style='height=30px;'> 
+							<textarea name="entry" cols="100" rows="20" style='border:0;overflow:hidden;'>{{ blogentry }}</textarea>
+						</div>
+						<div style='width:150px; height=30px; float:left'>
+							&nbsp;
+						</div>
+						<div style='height=30px; float:left;'>
+							<table border='0'>
+							<tr>
+								<td>
+									<input type='hidden' name='blogid' value='{{ blogid }}'>
+									<input type='submit' value='Edit'> 
+									</form>
+								</td>
+								<td> Or</td>
+								<td><form action='/blog/delete/' method='POST'></td>
+								<td>
+									<input type='submit' value='Delete'>
+									<input type='hidden' name='blogid' value='{{ blogid }}'>
+									</form>
+								</td>
+							</tr>
+							</table>
+						</div>
 					</p>
-
-					<p>
-						<b>Be Part of Our Community</b><br/>
-						If you&acute;re experiencing issues and concerns about this website or T-shirts, join the discussion <a href="/blog">on our blog</a> and meet other people in the community who share the same interests with you.
-					</p>
-				</div>
-				<div id="featured">
-					<a href="/shop/" class="button">shop here!</a> 
 				</div>
 			</div> <!-- /#contents -->
 			<div id="footer">

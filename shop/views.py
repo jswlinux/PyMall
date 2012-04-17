@@ -11,7 +11,7 @@ def shop(request):
 	if request.session.has_key('username'):
 		menu1 = "My cart"
 		address1 = "/membership/myCart/"
-		menu2 = "Sign out:"+(request.session['username'].capitalize())
+		menu2 = "Sign out:"+(request.session['username'])
 		address2 = "/membership/signout/"
 	else:
 	 	menu1 = "Sign in"

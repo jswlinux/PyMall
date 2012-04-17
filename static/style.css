@@ -120,6 +120,31 @@ img {
 	text-shadow: 1px 1px 0 #a8840b;
 }
 
+#blogwrite {
+	height: 40px;
+	list-style-type: none;
+	margin: 0;
+	padding: 8px 20px 12px 0;
+}
+#blogwrite li {
+	float: center;
+	font-family: 'CorbenBold';
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 40px;
+	width: 286px;
+	text-align: center;
+}
+#blogwrite a {
+	color: #9d7912;
+	text-decoration: none;
+}
+#blogwrite a:hover, #blogwrite li.selected a {
+	color: #f9f9f5;
+	text-shadow: 1px 1px 0 #a8840b;
+}
+
+
 /*------------------------------ CONTENTS ------------------------------*/
 #contents {
 	margin: 0 0 40px;
