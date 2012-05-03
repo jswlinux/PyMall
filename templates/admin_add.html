@@ -1,0 +1,150 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>PyMall</title>
+	<link rel="stylesheet" href="/static/style.css" type="text/css" charset="utf-8" />	
+</head>
+
+<body>
+	<div id="background">
+		<div id="page">
+			<div id="header">
+				<span id="connect">
+					<a href="https://www.facebook.com/jswlinux" target="_blank" class="facebook"></a>
+					<a href="http://twitter.com/jswlinux" target="_blank" class="twitter"></a>
+					<a href="http://www.youtube.com/jswlinux" target="_blank" class="vimeo"></a>
+				</span>
+				<span id="infos">
+					<a href={{ address1 }}>{{ menu1 }}</a>|
+					<a href="{{ address2 }}">{{ menu2 }}</a>
+				</span>
+				<a href="/" id="logo"></a> <!-- /#logo -->
+				<ul id="navigation">
+					<li><a href="/">Home</a></li>
+					<li><a href="/about/">About</a></li>
+					<li><a href="/blog/view/">Blog</a></li>
+					<li><a href="/shop/">Shop</a></li>
+					<li><a href="/contactus/">Contact Us</a></li>
+				</ul>
+			</div> <!-- /#header -->
+			<div id="blogs">
+				<center><ul id="blogwrite"><li><a href="/admin/">Go to Admin main</a></li></center></ul><br><br>
+			</div>
+			<div id="contents">
+				<div id="main">
+					<p>
+						{% ifnotequal image "yes" %}
+							<b>Step 1</b>:<hr>
+						{% endifnotequal %}
+						{% ifequal image "yes" %}
+							<b>Step 2</b>:<hr>
+						{% endifequal %}
+						<table border="0" style="height:250px;">
+						{% ifnotequal image "yes" %}
+							<tr>
+								<td><b>Image add</b>: </td>
+								<td>&nbsp;
+									<form action="/admin/upload/" method="post" enctype="multipart/form-data"></td>
+								<td>
+									File: <input type="file" name="file">
+									<input type="submit" value="Upload"><br>
+									</form>
+								</td>
+							<tr>
+						</table>
+						{% endifnotequal %}
+						{% ifequal image "yes" %}
+							<tr>
+								<td>&nbsp;<form method="POST" action="/admin/do_add/"></td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td rowspan="8">
+									<img src="/static/{{ imagePath}}">
+									<input type="hidden" name="filename" value="{{ imagePath }}">
+								</td>
+							</tr>
+							
+							<tr>
+								<td width="100"><b>Item type: </b></td>
+								<td>&nbsp;</td>
+								<td width="600">
+									<select name='item_type'>
+										<option value=''>Choose a type</option>
+										{% for category in categories %}
+											<option value='{{ category.id }}'>
+												{{ category.cat_desc }}
+											</option>
+										{% endfor %}
+									</select>
+								</td>
+								
+							</tr>
+							<tr>
+								<td><b>Item name</b>:</td>
+								<td>&nbsp;</td>
+								<td>
+									<input type="text" name="item_name" maxlength="50" size="100" onKeyup="this.value=this.value.replace(/[^A-z 0-9-]/g,'');">
+								</td>
+							</tr>
+							<tr>
+								<td><b>Description</b>: </td>
+								<td>&nbsp;</td>
+								<td>
+									<input type="text" name="item_desc" maxlength="200" size="100">
+								</td>
+							</tr>
+							<tr>
+								<td><b>Size</b>: </td>
+								<td>&nbsp;</td>
+								<td>
+									<input type="text" name="item_size" maxlength="3" size="100" onKeyup="this.value=this.value.replace(/[^A-z0-9-]/g,'');">
+								</td>
+							</tr>
+							<tr>
+								<td><b>Price</b>: </td>
+								<td>&nbsp;</td>
+								<td>
+									$<input type="text" name="item_price" maxlength="6" size="10" onKeyup="this.value=this.value.replace(/[^.0-9]/g,'');">
+								</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+									<td><input type='submit' value='Add this item'></td>
+									</form>
+							</tr>
+							<tr><td colspan=5>&nbsp;</td></tr>
+					<br>
+					</table>
+					{% endifequal %}
+					</p>
+				</div>
+				
+			</div> <!-- /#contents -->
+			<div id="footer">
+				<div id="description">
+					<div>
+						<a href="/" class="logo"></a>
+						<span>&copy; Copyright &copy; 2012. <a href="/">Seowon Jung</a> All rights reserved</span>
+					</div>
+					<p>
+						This website is Hawaii Pacific University CSCI 3771 Python class Project.
+					</p>
+				</div>
+				<div class="navigation">
+					<a href="/">Home</a>|
+					<a href="/about/">About</a>|
+					<a href="/blog/">Blog</a>|
+					<a href="/shop/">Shop</a>|
+					<a href="/contactus/">Contact Us</a>
+				</div>
+			</div> <!-- /#footer -->
+		</div> <!-- /#page -->
+	</div> <!-- /#background -->
+</body>
+</html>

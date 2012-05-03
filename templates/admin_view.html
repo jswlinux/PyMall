@@ -1,0 +1,128 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>PyMall</title>
+	<link rel="stylesheet" href="/static/style.css" type="text/css" charset="utf-8" />	
+</head>
+
+<body>
+	<div id="background">
+		<div id="page">
+			<div id="header">
+				<span id="connect">
+					<a href="https://www.facebook.com/jswlinux" target="_blank" class="facebook"></a>
+					<a href="http://twitter.com/jswlinux" target="_blank" class="twitter"></a>
+					<a href="http://www.youtube.com/jswlinux" target="_blank" class="vimeo"></a>
+				</span>
+				<span id="infos">
+					<a href={{ address1 }}>{{ menu1 }}</a>|
+					<a href="{{ address2 }}">{{ menu2 }}</a>
+				</span>
+				<a href="/" id="logo"></a> <!-- /#logo -->
+				<ul id="navigation">
+					<li><a href="/">Home</a></li>
+					<li><a href="/about/">About</a></li>
+					<li><a href="/blog/view/">Blog</a></li>
+					<li><a href="/shop/">Shop</a></li>
+					<li><a href="/contactus/">Contact Us</a></li>
+				</ul>
+			</div> <!-- /#header -->
+			<div id="blogs">
+				<center><ul id="blogwrite"><li><a href="/admin/">Go to Admin main</a></li></center></ul><br><br>
+			</div>
+			<div id="contents">
+				<div id="main">
+					<p>
+						<table border="0">
+						{% for item in allItem %}
+							<tr>
+								<td rowspan="5"><img src="/static/{{ item.item_img }}" width="101" height="125"></td>
+								<td width="100"><b>Item#</b>:</td>
+								<td width="600">{{ item.id }}</td>
+								<td>&nbsp;<form method='post' action='/admin/edit/'></td>
+								<td>&nbsp;<input type='hidden' name='item_id' value='{{ item.id }}'></td>
+							</tr>
+							<tr>
+								<td><b>Item type: </b></td>
+								<td>
+									<select name='item_type'>
+										<option value='' 
+										{% ifnotequal category.id item.cat_no_id %}
+											selected
+										{% endifnotequal %}
+										>Choose a type</option>
+										{% for category in categories %}
+											<option value='{{ category.id }}' 
+											{% ifequal category.id item.cat_no_id %}
+												selected
+											{% endifequal %}
+											>{{ category.cat_desc }}</option>
+										{% endfor %}
+									</select>
+								</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td><b>Item name</b>:</td>
+								<td>
+									<input type="text" name="item_name" value="{{ item.item_name }}" maxlength="50" size="100" onKeyup="this.value=this.value.replace(/[^A-z 0-9]/g,'');">
+								</td>
+								<td>$<input type="text" name="item_price" value="{{ item.item_price }}" maxlength="6" size="5" onKeyup="this.value=this.value.replace(/[^.0-9]/g,'');"></td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td><b>Description</b>: </td>
+								<td>
+									<input type="text" name="item_desc" value="{{ item.item_desc }}" maxlength="200" size="100">
+								</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td><b>Size</b>: </td>
+								<td>
+									<input type="text" name="item_size" value="{{ item.item_size }}" maxlength="3" size="100" onKeyup="this.value=this.value.replace(/[^A-z0-9]/g,'');">
+								</td>
+								<td><input type='submit' value='Edit'></td>
+								<td>
+									<a href="/admin/delete/?item_id={{ item.id }}">
+									<div style="text-align:right">Delete</div></a>
+								</td>
+								<td>&nbsp;</td>
+							<tr>
+							<tr><td colspan=5>&nbsp;</td></tr>
+						</form>
+						{% endfor %}
+					<br>
+					</table>
+					</p>
+
+					<p>
+						
+					</p>
+				</div>
+				
+			</div> <!-- /#contents -->
+			<div id="footer">
+				<div id="description">
+					<div>
+						<a href="/" class="logo"></a>
+						<span>&copy; Copyright &copy; 2012. <a href="/">Seowon Jung</a> All rights reserved</span>
+					</div>
+					<p>
+						This website is Hawaii Pacific University CSCI 3771 Python class Project.
+					</p>
+				</div>
+				<div class="navigation">
+					<a href="/">Home</a>|
+					<a href="/about/">About</a>|
+					<a href="/blog/">Blog</a>|
+					<a href="/shop/">Shop</a>|
+					<a href="/contactus/">Contact Us</a>
+				</div>
+			</div> <!-- /#footer -->
+		</div> <!-- /#page -->
+	</div> <!-- /#background -->
+</body>
+</html>

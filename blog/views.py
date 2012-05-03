@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 from django.template.loader import get_template
 from django.template.context import Context
-from blog.models import blog, reply
-from membership.models import membership
+from blog.models import Blog, Reply
+from membership.models import Membership
 import time
 
 def view(request):
@@ -32,49 +32,55 @@ def view(request):
 	{	
 		"menu1":menu1, "address1":address1,
 		"menu2":menu2, "address2":address2,
-		"blog":blog.objects.all().order_by('-id')[startPos:endPos],
-		"reply":reply.objects.all(),
-		"login":membership.objects.all(),
+		"blog":Blog.objects.all().order_by('-id')[startPos:endPos],
+		"reply":Reply.objects.all().order_by('-id'),
+		"login":Membership.objects.all(),
 		"page":page,
-		"currentuser":request.session['user_no']
+#		"currentuser":request.session['user_no']
 	})))
 	
 def write(request):	
 	if request.session.has_key('username'):
 		blogWriteTemplate = get_template('write.html')
-		return HttpResponse(blogWriteTemplate.render(Context({
+		return HttpResponse(blogWriteTemplate.render(Context(
+		{
 			"menu1":"My cart", "address1":"/membership/myCart/",
-			"menu2":"Sign out:"+(request.session['username']), "address2":"/membership/signout/",
-			})))
+			"menu2":"Sign out:"+(request.session['username']), 
+			"address2":"/membership/signout/",
+		})))
 	else:
 		return HttpResponse("<script>window.alert('Login Please');document.location.replace('/membership/signin/');</script>")
 
 def edit(request):
-	blog.objects.filter(id=request.POST['blogid']).update(title=request.POST['title'], entry=request.POST['entry'])
+	Blog.objects.filter(id=request.POST['blogid']).update(**
+	{
+		'title':request.POST['title'], 
+		'entry':request.POST['entry']
+	})
 	return HttpResponse("<script>window.alert('Edited');document.location.replace('/blog/view/');</script>")
 
 def useredit(request):
 	editTemplate = get_template('blogedit.html')
 
-	blogEntry = blog.objects.get(id=request.POST['blogid'])
+	blogEntry = Blog.objects.get(id=request.POST['blogid'])
 	print blogEntry.entry
 	print blogEntry.title
 
-	return HttpResponse(editTemplate.render(Context({
+	return HttpResponse(editTemplate.render(Context(
+	{
 		"menu1":"My cart", "address1":"/membership/myCart/",
-		"menu2":"Sign out:"+(request.session['username']), "address2":"/membership/signout/",
+		"menu2":"Sign out:"+(request.session['username']), 
+		"address2":"/membership/signout/",
 		"blogentry":blogEntry.entry,
 		"blogtitle":blogEntry.title,
 		"blogid":request.POST['blogid']
-		})))
+	})))
 
 def delete(request):
-	blog.objects.filter(id=request.POST['blogid']).delete()
+	Blog.objects.filter(id=request.POST['blogid']).delete()
 	return HttpResponse("<script>window.alert('Deleted');document.location.replace('/blog/view/');</script>")
 
 def save(request):
-	#blogTemplate = get_template('blog.html')
-
 	if len(request.POST['title']) == 0 or len(request.POST['entry']) == 0:
 		return HttpResponse("<script>window.alert('No empty box is allowed. Please try again');history.back();</script>")
 	else:
@@ -88,7 +94,13 @@ def save(request):
 
 		blogTime = str(now.tm_year)+'/'+month+'/'+str(now.tm_mday)
 
-		saveBlog = blog(title=request.POST['title'], date=blogTime, entry=request.POST['entry'], user_no=request.session['user_no'])
+		saveBlog = Blog(**
+		{
+			'title':request.POST['title'], 
+			'date':blogTime, 
+			'entry':request.POST['entry'], 
+			'user_no':request.session['user_no']
+		})
 		saveBlog.save()
 
 		return HttpResponse("<script>window.alert('Posted');document.location.replace('/blog/view/');</script>")
@@ -101,16 +113,22 @@ def addReply(request):
 			month = '0'+str(now.tm_mon)
 		else:
 			month = str(now.tm_mon)
+		if now.tm_mday < 10:
+			mday = '0'+str(now.tm_mday)
+		else:
+			mday = str(now.tm_mday)
 
-		replyTime = str(now.tm_year)+'/'+month+'/'+str(now.tm_mday)
+		replyTime = str(now.tm_year)+'/'+month+'/'+mday
 
-		saveReply = reply(comment=request.POST['reply'], date=replyTime, user_no=request.session['user_no'], entry_no_id=request.POST['blogid'])
+		saveReply = Reply(**
+		{
+			'comment':request.POST['reply'], 
+			'date':replyTime, 
+			'user_no':request.session['user_no'],
+			'entry_no_id':request.POST['blogid']
+		})
 		saveReply.save()
 		
 		return HttpResponse("<script>window.alert('Comment added');document.location.replace('/blog/view/');</script>")
 	else:
 		return HttpResponse("<script>window.alert('Login Please');document.location.replace('/membership/signin/');</script>")
-
-
-
-

@@ -12,6 +12,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'pymall',                      # Or path to database file if using sqlite3.
         'USER': 'hpu',                      # Not used with sqlite3.
         'PASSWORD': 'seowonjung',                  # Not used with sqlite3.
@@ -133,13 +134,14 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    'django.contrib.admin',
+    #'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    #'django.contrib.admindocs',
 	'pymall',
 	'pymall.shop',
     'pymall.membership',
 	'pymall.blog',
+	'pymall.admin',
 )
 
 # A sample logging configuration. The only tangible logging

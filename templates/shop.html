@@ -27,6 +27,14 @@
 					<li><a href="/contactus/">Contact Us</a></li>
 				</ul>
 			</div> <!-- /#header -->
+			<div>
+				<center><font size="5">
+					{% for category in categories %}
+					<a href="/shop/?category={{ category.id }}">{{ category.cat_desc }}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					{% endfor %}
+				</font></center>
+				<br><br>
+			</div>
 			<div id="contents">
 				<div id="shop">
 					<ul class="items">
@@ -36,13 +44,25 @@
 							<a href="?item_no={{ each.id }}">	
 								<span><img src="/static/{{ each.item_img }}"></span>
 								<span class="price">${{ each.item_price}}</span>
-								{{ each.item_name }}</a>
-								<a href="/membership/addCart/?item_no={{ each.id }}" class="buy">Cart</a>
-								</li>
+								{% for category in categories %}
+									{% ifequal each.cat_no_id category.id %}
+										{{ category.cat_desc }} 
+									{% endifequal %}
+								{% endfor %}
+								{{ each.item_name }}
+							</a>
+							<a href="/membership/addCart/?item_no={{ each.id }}" class="buy">Cart</a>
+						</li>
 						{% endfor %}
 					</ul>
 				</div>
+				{% ifequal admin "yes" %}						
+				<div id="featured">
+					<a href="/admin/" class="button">Admin</a>
+				</div>
+				{% endifequal %}
 			</div> <!-- /#contents -->
+					
 			<div id="footer">
 				<div id="description">
 					<div>
