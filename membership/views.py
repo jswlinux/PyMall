@@ -262,12 +262,17 @@ def do_ResetPassword(request):
 				'firstname':request.POST['firstname'],
 				'lastname':request.POST['lastname']
 			})
+			print "error"
 		except:
-			return HttpResponse("<script>window.alert('No exist user\\nUsername: "+request.POST['username']+"\\nFirst name: "+request.POST['firstname']+"\\nLast name: '"+request.POST['lastname']+");history.back();</script>")
+			return HttpResponse("<script>window.alert('No exist user\\nUsername: "+request.POST['username']+"\\nFirst name: "+request.POST['firstname']+"\\nLast name: '"+request.POST['lastname']+");document.location.replace('/membership/resetPassword');</script>")
 		else:
 			Membership.objects.filter(id=resetUser.id).update(password=request.POST['newpassword2'])
-			if request.POST['alreadyLogin'] == 'yes':
-				return HttpResponse("<script>window.alert('Password reset!');document.location.replace('/membership/myCart/');</script>")
+
+			if request.POST.has_key('alreadyLogin'):
+				if request.POST['alreadyLogin'] == 'yes':
+					return HttpResponse("<script>window.alert('Password reset!');document.location.replace('/membership/myCart/');</script>")
+				else:
+					return HttpResponse("<script>window.alert('Password reset!');document.location.replace('/membership/signin/');</script>")
 			else:
 				return HttpResponse("<script>window.alert('Password reset!');document.location.replace('/membership/signin/');</script>")
 

@@ -13,11 +13,13 @@ def view(request):
 		menu2 = "Sign out:"+(request.session['username'])
 		address1 = "/membership/myCart/"
 		address2 = "/membership/signout/"
+		currentuser = request.session['user_no']
 	else:
 		menu1 = "Sign in"
 		menu2 = "Sign up"
 		address1 = "/membership/signin/"
 		address2 = "/membership/signup/"
+		currentuser = ''
 
 	try:
 		page = int(request.GET['page'])
@@ -36,7 +38,7 @@ def view(request):
 		"reply":Reply.objects.all().order_by('-id'),
 		"login":Membership.objects.all(),
 		"page":page,
-#		"currentuser":request.session['user_no']
+		"currentuser":currentuser
 	})))
 	
 def write(request):	
